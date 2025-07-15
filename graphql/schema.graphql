@@ -1,0 +1,40 @@
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+type Query {
+    artists: [Artist!]! @all
+    albums: [Album!]! @all
+    members: [Member!]! @all
+}
+
+type Artist {
+    uuid: ID!
+    name: String!
+    startYear: Float! @rename(attribute: "start_year")
+    endYear: Float @rename(attribute: "end_year")
+    albums: [Album!]!
+    members: [Member!]!
+    createdAt: DateTime! @rename(attribute: "created_at")
+    updatedAt: DateTime! @rename(attribute: "updated_at")
+}
+
+type Album {
+    uuid: ID!
+    name: String!
+    releaseDate: DateTime! @rename(attribute: "release_date")
+    link: String!
+    numRatings: Float! @rename(attribute: "num_ratings")
+    userRatingTotal: Float! @rename(attribute: "user_rating_total")
+    staticRating: Float! @rename(attribute: "static_rating")
+    userRating: Float! @field(resolver: "App\\GraphQL\\Resolvers\\AlbumResolver@userRating")
+    artist: Artist!
+    createdAt: DateTime! @rename(attribute: "created_at")
+    updatedAt: DateTime! @rename(attribute: "updated_at")
+}
+
+type Member {
+    uuid: ID!
+    artists: [Artist!]!
+    fullName: String! @rename(attribute: "full_name")
+    createdAt: DateTime! @rename(attribute: "created_at")
+    updatedAt: DateTime! @rename(attribute: "updated_at")
+}

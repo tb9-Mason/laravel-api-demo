@@ -9,7 +9,7 @@ class RejectNonApiRequests
 {
     public function handle(Request $request, Closure $next)
     {
-        if (!preg_match('#^api(/|$)#', $request->path()) && $request->path() !== 'up') {
+        if (!preg_match('#^api(/|$)#', $request->path()) && $request->path() !== 'up' && $request->path() !== 'graphiql' && $request->path() !== 'graphql') {
             return response()->json([['error' => 'Not Found']], 404);
         }
 

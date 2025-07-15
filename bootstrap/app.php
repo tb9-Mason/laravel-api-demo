@@ -19,4 +19,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->shouldRenderJsonWhen(function(Request $request, Throwable $e) {
             return true;
         });
-    })->create();
+    })
+    ->withProviders([\Nuwave\Lighthouse\LighthouseServiceProvider::class])
+    ->create();
