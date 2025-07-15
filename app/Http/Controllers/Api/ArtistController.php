@@ -16,17 +16,10 @@ class ArtistController extends Controller
     }
 
     // GET /api/artists/{id}
-    public function show($id)
+    public function show(Request $request, string $uuid)
     {
         // Get one artist by ID
-        $artists = Artist::all();
-        return $artists->findOrFail($id);
-    }
-
-    // POST /api/artists
-    public function store(Request $request)
-    {
-        $artist = Artist::create($request->only(['name', 'start_year', 'end_year']));
-        return response()->json($artist, 201);
+        $artist = Artist::findOrFail($uuid);
+        return $artist;
     }
 }
