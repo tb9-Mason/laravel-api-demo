@@ -12,6 +12,8 @@ class Album extends Base {
         'release_date' => 'datetime',
     ];
 
+    protected $fillable = ['user_rating_total', 'num_ratings'];
+
     public function artist(): BelongsTo
     {
         return $this->belongsTo(Artist::class);

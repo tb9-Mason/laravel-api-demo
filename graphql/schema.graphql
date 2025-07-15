@@ -38,3 +38,12 @@ type Member {
     createdAt: DateTime! @rename(attribute: "created_at")
     updatedAt: DateTime! @rename(attribute: "updated_at")
 }
+
+type Mutation {
+  updateUserRating(data: UpdateUserRatingInput!): Album! @field(resolver: "App\\GraphQL\\Mutations\\UserRatingMutation@update")
+}
+
+input UpdateUserRatingInput {
+  rating: Float! @rules(apply: ["numeric", "min:1", "max:5"])
+  uuid: String!
+}
