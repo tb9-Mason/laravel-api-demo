@@ -16,7 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->append(\App\Http\Middleware\RejectNonApiRequests::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->renderable(function (NotFoundHttpException $e, Request $request) {
-            return response()->json(['error' => 'Not Found'], 404);
+        $exceptions->shouldRenderJsonWhen(function(Request $request, Throwable $e) {
+            return true;
         });
     })->create();
